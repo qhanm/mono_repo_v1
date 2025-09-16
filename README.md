@@ -1,31 +1,39 @@
-# shadcn/ui monorepo template
+### Add apps ReactJs Vite
 
-This template is for creating a monorepo with shadcn/ui.
+`pnpm create vite@latest`
 
-## Usage
+- Update vite.config.ts
 
-```bash
-pnpm dlx shadcn@latest init
+```
+export default defineConfig({
+  resolve: {
+    alias: {
+      "@workspace/ui": path.resolve(__dirname, "../../packages/ui/src"),
+    },
+  },
+});
 ```
 
-## Adding components
+- Add to tsconfig.app.json
 
-To add components to your app, run the following command at the root of your `web` app:
-
-```bash
-pnpm dlx shadcn@latest add button -c apps/web
+```
+{
+  "compilerOptions": {
+  "baseUrl": ".",
+    "paths": {
+      "@workspace/ui/*": ["../../packages/ui/src/*"]
+    }
+  },
+  "include": ["src"]
+}
 ```
 
-This will place the ui components in the `packages/ui/src/components` directory.
+- Read docs: https://ui.shadcn.com/docs/installation/vite
 
-## Tailwind
+### Add apps Nextjs
 
-Your `tailwind.config.ts` and `globals.css` are already set up to use the components from the `ui` package.
+`...`
 
-## Using components
+### Run with single app
 
-To use the components in your app, import them from the `ui` package.
-
-```tsx
-import { Button } from "@workspace/ui/components/button"
-```
+`yarn dev --filter=[App Name]`
